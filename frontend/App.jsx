@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Button, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { Audio } from "expo-av";
 import Chat from "./components/Chat";
 import { FontAwesome } from "@expo/vector-icons";
-
+import db, { getChats } from "./firebase";
 export default function App() {
   const [isRecording, setIsRecording] = useState(false);
   const [recording, setRecording] = useState(null);
@@ -18,7 +18,6 @@ export default function App() {
       message: "Hello, how can I help you?",
     },
   ]);
-
   const requestPermission = async () => {
     // Request microphone permission
     const { status } = await Audio.requestPermissionsAsync();
@@ -113,7 +112,7 @@ export default function App() {
       headers: {
         "Content-Type": "application/json",
         Authorization:
-          "Bearer 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",
+          "Bearer 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",
       },
       body: JSON.stringify({
         model: "gpt-3.5-turbo",
